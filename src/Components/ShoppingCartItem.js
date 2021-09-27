@@ -21,9 +21,6 @@ export default class ShoppingCartItem extends React.Component {
             <DivCartItem>
                 <p>10x - Celular</p>
                 <button>Remover</button>
-                <h1>
-                  {this.produtos[0].nome}
-                </h1>
             </DivCartItem>
       </div>
     );
