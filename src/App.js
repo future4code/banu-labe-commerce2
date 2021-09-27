@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import Filters from './Components/Filters';
+import Products from './Components/Products';
+import ShoppingCart from './Components/ShoppingCart';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const DivApp = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export default class App extends React.Component {
+
+  state = {
+    filter:
+      {
+      valorMin: '',
+      valorMax: '',
+      nome: 'bbbbbbbbbbb',
+    },
+
+    inputValorMin: '',
+    inputValorMax: '',
+    inputNome: 'aaaaaaa',
+  }
+
+  render() {
+    return (
+      <DivApp>
+        <Filters filtroState={this.state}/>
+        <Products filtroState={this.state}/>
+        <ShoppingCart filtroState={this.state}/>
+      </DivApp>
+    );
+  }
 }
-
-export default App;
