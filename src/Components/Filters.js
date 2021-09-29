@@ -13,24 +13,23 @@ const DivFilter = styled.div`
 
 
 export default class Filters extends React.Component {
-  render() {
-      const EstadoApp = this.props.filtroState;
 
+  render() {
     return (
       <DivFilter>
         <form>
             <h3>Filtros:</h3>
                 <label>
                     <p>Valor mínimo</p>
-                    <input />
+                    <input type={"number"} onChange={this.props.onChangeValorMin} value={this.props.filtroState.valorMin} />
                 </label>
                 <label>
                     <p>Valor máximo</p>
-                    <input />
+                    <input type={"number"} onChange={this.props.onChangeValorMax} value={this.props.filtroState.valorMax} />
                 </label>
                 <label>
                     <p>Buscar nome</p>
-                    <input />
+                    <input type={"text"} onChange={this.props.onChangeName} value={this.props.filtroState.nome} />
                 </label>
         </form>
       </DivFilter>
