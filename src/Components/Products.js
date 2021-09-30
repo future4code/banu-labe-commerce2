@@ -53,7 +53,7 @@ export default class Products extends React.Component {
             </form>
         </DivProductFilter>
         <DivProductCart>
-            <ProductCard produtos={produtos} filtroState={this.props.filtroState} />
+            <ProductCard produtos={produtos} filtroState={this.props.filtroState} addToCart={this.props.addToCart}/>
         </DivProductCart>
       </DivProductArea>
     );
