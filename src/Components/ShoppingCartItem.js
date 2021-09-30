@@ -7,7 +7,7 @@ const DivCartItem = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 15vw;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 `;
 
 export default class ShoppingCartItem extends React.Component {

@@ -1,37 +1,56 @@
 import React from 'react';
 import styled from "styled-components";
+import Header from './Components/Header';
 import Filters from './Components/Filters';
 import Products from './Components/Products';
 import ShoppingCart from './Components/ShoppingCart';
+import Rodape from './Components/Footer';
+
+const TelaTotal = styled.body`
+margin: 0%;
+padding: 0;
+background-color: #E9EAE9;
+`;
 
 const DivApp = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* background-color: #E9EAE9; */
+
+@media (max-width: 767px) {
+display: none;
+}
+
+@media (max-width: 400px) {
+
+}
 `;
+
+
 
 export default class App extends React.Component {
 
   state = {
-      valorMin: '',
-      valorMax: '',
-      nome: '',
+    valorMin: '',
+    valorMax: '',
+    nome: '',
   }
 
-  
+
   onChangeValorMin = (event) => {
-    this.setState({valorMin: event.target.value})
+    this.setState({ valorMin: event.target.value })
     console.log(this.state.valorMin)
   }
 
   onChangeValorMax = (event) => {
-    this.setState({valorMax: event.target.value})
+    this.setState({ valorMax: event.target.value })
     console.log(this.state.valorMax)
   }
-  
+
   onChangeName = (event) => {
-    this.setState({nome: event.target.value})
+    this.setState({ nome: event.target.value })
     console.log(this.state.nome)
   }
 
@@ -74,11 +93,18 @@ export default class App extends React.Component {
       },
     ];
     return (
-      <DivApp>
-        <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos}/>
-        <Products filtroState={this.state} produtos={produtos}/>
-        <ShoppingCart filtroState={this.state} produtos={produtos}/>
-      </DivApp>
+
+      <TelaTotal>
+        <Header />
+        <DivApp>
+          <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax}
+            onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos} />
+          <Products filtroState={this.state} produtos={produtos} />
+          <ShoppingCart filtroState={this.state} produtos={produtos} />
+        </DivApp>
+        <Rodape />
+      </TelaTotal>
+
     );
   }
 }

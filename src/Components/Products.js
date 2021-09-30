@@ -6,8 +6,9 @@ const DivProductArea = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 60vw;
-`;
+    width: 72vw;
+    margin-top: 5vh;
+    `;
 
 const DivProductCart = styled.div`
     display: flex;
@@ -26,10 +27,12 @@ const DivProductFilter = styled.div`
 `;
 
 const DivProductFilterOptions = styled.label`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4vh;
+padding-right: 5vw;
+  width: 15vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 4vh;
 `;
 
 
