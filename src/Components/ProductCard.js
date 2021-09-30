@@ -29,6 +29,7 @@ const ItemImage = styled.img`
 
 
 export default class ProductCard extends React.Component {
+
   render() {
 
     let FilterMin = this.props.produtos.filter((produto, index, valor) => {
@@ -61,7 +62,7 @@ export default class ProductCard extends React.Component {
           <ItemImage src={produto.imageUrl} />
           <p>{produto.name}</p>
           <p>R$ {produto.value}</p>
-          <button>Adicionar ao carrinho</button>
+          <button onClick={() => this.props.addToCart(produto)}>Adicionar ao carrinho</button>
         </ShoppingCartItem>
       )
     })
