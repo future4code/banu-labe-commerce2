@@ -18,13 +18,29 @@ const ShoppingCartItem = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid black;
+    width: 22vw;
+    border: 1px solid gray;
+    border-radius: 15px;
     padding: 5px;
 `;
 
 const ItemImage = styled.img`
     height: 55%;
     width: auto;
+`;
+
+const Botao = styled.button`
+border: none;
+border-radius: 5px;
+background-color: #00acb7;
+color: white;
+font-weight: bold;
+font-size: 0.9em;
+height: 4vh;
+
+:hover{
+  background-color: green;
+}
 `;
 
 
@@ -62,7 +78,7 @@ export default class ProductCard extends React.Component {
           <ItemImage src={produto.imageUrl} />
           <p>{produto.name}</p>
           <p>R$ {produto.value}</p>
-          <button onClick={() => this.props.addToCart(produto)}>Adicionar ao carrinho</button>
+          <Botao onClick={() => this.props.addToCart(produto)}>Adicionar ao carrinho</Botao>
         </ShoppingCartItem>
       )
     })

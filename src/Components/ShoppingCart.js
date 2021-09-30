@@ -5,7 +5,7 @@ const Container = styled.div`
   width: 350px;
   height: 500px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  display: flex;
+  display: none;
   flex-flow: column nowrap;
   align-items: center;
   padding: 20px;

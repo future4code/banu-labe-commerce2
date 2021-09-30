@@ -8,7 +8,8 @@ const DivProductArea = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 60vw;
+    width: 72vw;
+    margin-top: 5vh;
 `;
 
 const DivProductCart = styled.div`
@@ -28,10 +29,12 @@ const DivProductFilter = styled.div`
 `;
 
 const DivProductFilterOptions = styled.label`
+    width: 30vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 4vh;
+    /* background-color: yellow; */
 `;
 
 
@@ -43,15 +46,16 @@ export default class Products extends React.Component {
     return (
       <DivProductArea>
         <DivProductFilter>
-            <p>Quantidade de produtos: 6</p>
-            <form>
-                <DivProductFilterOptions>
-                      <Sort/>
-                </DivProductFilterOptions>
-            </form>
+          <p>Quantidade de produtos: 6</p>
+          <form>
+            <DivProductFilterOptions>
+              <Sort />
+            </DivProductFilterOptions>
+          </form>
         </DivProductFilter>
         <DivProductCart>
-            <ProductCard produtos={produtos} filtroState={this.props.filtroState} addToCart={this.props.addToCart}/>
+          <ProductCard produtos={produtos} filtroState={this.props.filtroState} 
+          addToCart={this.props.addToCart} />
         </DivProductCart>
       </DivProductArea>
     );

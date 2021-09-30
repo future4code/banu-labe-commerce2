@@ -1,9 +1,17 @@
 import React from 'react';
 import styled from "styled-components";
-import './App.css'
+// import './App.css';
+import Header from './Components/Header';
 import Filters from './Components/Filters';
 import Products from './Components/Products';
 import ShoppingCart from './Components/ShoppingCart';
+import Footer from './Components/Footer';
+
+const Tela = styled.body`
+margin: 0%;
+padding: 0;
+background-color: #E9EAE9;
+`;
 
 const DivApp = styled.div`
   display: flex;
@@ -15,24 +23,24 @@ const DivApp = styled.div`
 export default class App extends React.Component {
 
   state = {
-      valorMin: '',
-      valorMax: '',
-      nome: '',
-      cartProducts: []
+    valorMin: '',
+    valorMax: '',
+    nome: '',
+    cartProducts: []
   }
 
   onChangeValorMin = (event) => {
-    this.setState({valorMin: event.target.value})
+    this.setState({ valorMin: event.target.value })
     console.log(this.state.valorMin)
   }
 
   onChangeValorMax = (event) => {
-    this.setState({valorMax: event.target.value})
+    this.setState({ valorMax: event.target.value })
     console.log(this.state.valorMax)
   }
-  
+
   onChangeName = (event) => {
-    this.setState({nome: event.target.value})
+    this.setState({ nome: event.target.value })
     console.log(this.state.nome)
   }
 
@@ -42,60 +50,60 @@ export default class App extends React.Component {
     const currentCart = [...this.state.cartProducts]
     console.log(currentCart)
     const produtoExistenteIndex = currentCart.findIndex(item => item.id === value.id)
-    
+
     if (produtoExistenteIndex !== -1) {
-      const newValue = {...value, quantity: currentCart[produtoExistenteIndex].quantity +1}
+      const newValue = { ...value, quantity: currentCart[produtoExistenteIndex].quantity + 1 }
       currentCart[produtoExistenteIndex] = newValue
-      this.setState({cartProducts: currentCart})
+      this.setState({ cartProducts: currentCart })
 
     } else {
-      currentCart.push({...value, quantity: 1})
-      this.setState({cartProducts: currentCart})
+      currentCart.push({ ...value, quantity: 1 })
+      this.setState({ cartProducts: currentCart })
     }
   }
 
   decrementQuantity = (value) => {
     const currentCart = this.state.cartProducts.map((item, i) => {
       if (item.id === value.id && value.quantity > 0) {
-        return {...value, quantity: value.quantity -1}
+        return { ...value, quantity: value.quantity - 1 }
       } else {
         return item
       }
     })
-    this.setState({cartProducts: currentCart})
+    this.setState({ cartProducts: currentCart })
   }
-  
+
   increaseQuantity = (value) => {
     const currentCart = this.state.cartProducts.map((item, i) => {
       if (item.id === value.id) {
-        return {...value, quantity: value.quantity +1}
+        return { ...value, quantity: value.quantity + 1 }
       }
       return item
     })
-    this.setState({cartProducts: currentCart})
+    this.setState({ cartProducts: currentCart })
   }
 
   removeItem = (value) => {
     const currentCart = [...this.state.cartProducts]
     const itemIndex = currentCart.findIndex(item => item.id === value.id)
     currentCart.splice(itemIndex, 1)
-    this.setState({cartProducts: currentCart})
+    this.setState({ cartProducts: currentCart })
   }
 
 
   // Life Cycles
-  
+
   componentDidMount = () => {
     if (localStorage.getItem('CartItens')) {
       const userCart = localStorage.getItem('CartItens')
-      this.setState({cartProducts: JSON.parse(userCart)})
+      this.setState({ cartProducts: JSON.parse(userCart) })
     }
   }
 
   componentDidUpdate = (prevState) => {
-      if (prevState.cartProducts !== this.state.cartProducts) {
-        localStorage.setItem('CartItens', JSON.stringify([...this.state.cartProducts]))
-      }
+    if (prevState.cartProducts !== this.state.cartProducts) {
+      localStorage.setItem('CartItens', JSON.stringify([...this.state.cartProducts]))
+    }
   }
 
   render() {
@@ -137,19 +145,22 @@ export default class App extends React.Component {
       },
     ];
     return (
-      <DivApp>
-        <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos}/>
-        <Products filtroState={this.state} produtos={produtos} addToCart={this.addToCart}/>
-        <ShoppingCart 
-          filtroState={this.state}
-          produtos={produtos} 
-          cartProducts={this.state.cartProducts}
-          decrementQuantity={this.decrementQuantity}
-          increaseQuantity={this.increaseQuantity}
-          removeItem={this.removeItem}
-        />
-          
-      </DivApp>
+      <Tela>
+        <Header />
+        <DivApp>
+          <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos} />
+          <Products filtroState={this.state} produtos={produtos} addToCart={this.addToCart} />
+          <ShoppingCart
+            filtroState={this.state}
+            produtos={produtos}
+            cartProducts={this.state.cartProducts}
+            decrementQuantity={this.decrementQuantity}
+            increaseQuantity={this.increaseQuantity}
+            removeItem={this.removeItem}
+          />
+        </DivApp>
+        <Footer />
+      </Tela>
     );
   }
 }
