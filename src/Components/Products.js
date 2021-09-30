@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import ProductCard from './ProductCard';
+import Sort from './Sort'
+
 
 const DivProductArea = styled.div`
     display: flex;
@@ -44,11 +46,7 @@ export default class Products extends React.Component {
             <p>Quantidade de produtos: 6</p>
             <form>
                 <DivProductFilterOptions>
-                        <p>Ordenação:</p>
-                        <select>
-                            <option>Crescente</option>
-                            <option>Decrescente</option>
-                        </select>
+                      <Sort/>
                 </DivProductFilterOptions>
             </form>
         </DivProductFilter>
