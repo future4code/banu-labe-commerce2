@@ -14,7 +14,9 @@ padding-right: 50px;
 
 @media (max-width: 767px){
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 100vw;
 }
 `;
 
@@ -23,6 +25,10 @@ const Logo = styled.h1`
     'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 3.5em;
     color: #fff;
+
+    @media (max-width: 767px){
+    font-size: 2em;
+}
 `;
 
 const Menu = styled.ul`
@@ -36,6 +42,10 @@ list-style: none;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+
+@media (max-width: 767px){
+    display: none;
+}
 `;
 
 const Categorias = styled.button`
@@ -53,6 +63,13 @@ height: 13vh;
 const Carrinho = styled.img`
 max-width: 3.5vw;
 cursor: pointer;
+
+@media (max-width: 767px){
+    display: flex;
+    flex-direction: column;
+    max-width: 8vw;
+    margin-right: -50px
+}
 `
 
 export default class Cabecalho extends React.Component {
@@ -66,7 +83,7 @@ export default class Cabecalho extends React.Component {
                     <Categorias> Presentes </Categorias>
                     <Categorias> Decoração </Categorias>
                 </Menu>
-                <Carrinho src={carrinho} onClick={this.props.changeCartScreen}/>
+                <Carrinho src={carrinho} onClick={this.props.changeCartScreen} />
             </Header>
         );
     }
