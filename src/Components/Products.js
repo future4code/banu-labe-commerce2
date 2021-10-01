@@ -10,6 +10,11 @@ const DivProductArea = styled.div`
     height: 100vh;
     width: 72vw;
     margin-top: 5vh;
+
+    @media (max-width: 767px){
+      margin: 10vw 0;
+    /* background-color: yellow; */
+}
 `;
 
 const DivProductCart = styled.div`
@@ -19,6 +24,11 @@ const DivProductCart = styled.div`
     flex-wrap: wrap;
     height: 92vh;
     width: 60vw;
+   
+  @media (max-width: 767px){
+    width: auto;
+    /* background-color: yellow; */
+  }
 `;
 
 const DivProductFilter = styled.div`
@@ -26,6 +36,12 @@ const DivProductFilter = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 8vh;
+
+    @media (max-width: 767px){
+      display: flex;
+      justify-content: center;
+    /* background-color: yellow; */
+  }
 `;
 
 const DivProductFilterOptions = styled.label`
@@ -34,7 +50,17 @@ const DivProductFilterOptions = styled.label`
     justify-content: space-around;
     align-items: center;
     height: 4vh;
+    
+    @media (max-width: 767px){
     /* background-color: yellow; */
+  }
+`;
+
+const QntProdutos = styled.p`
+ @media (max-width: 767px){
+   display: none;
+    /* background-color: yellow; */
+  }
 `;
 
 
@@ -46,7 +72,7 @@ export default class Products extends React.Component {
     return (
       <DivProductArea>
         <DivProductFilter>
-          <p>Quantidade de produtos: 6</p>
+          <QntProdutos>Quantidade de produtos: 6</QntProdutos>
           <form>
             <DivProductFilterOptions>
               <Sort />
