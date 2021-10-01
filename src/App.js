@@ -26,7 +26,8 @@ export default class App extends React.Component {
     valorMin: '',
     valorMax: '',
     nome: '',
-    cartProducts: []
+    cartProducts: [],
+    productsScreen: false,
   }
 
   onChangeValorMin = (event) => {
@@ -63,14 +64,23 @@ export default class App extends React.Component {
   }
 
   decrementQuantity = (value) => {
-    const currentCart = this.state.cartProducts.map((item, i) => {
-      if (item.id === value.id && value.quantity > 0) {
-        return { ...value, quantity: value.quantity - 1 }
-      } else {
-        return item
-      }
-    })
+    let currentCart
+    
+    if (value.quantity === 1) {
+      currentCart = this.state.cartProducts.filter(item => item.id !== value.id)
+    } else {
+      currentCart = this.state.cartProducts.map(item => {
+        if (item.id === value.id && value.quantity > 0) {
+          return { ...value, quantity: value.quantity - 1 }
+        } else {
+          return item
+        }
+      })
+    }
+
     this.setState({ cartProducts: currentCart })
+
+    
   }
 
   increaseQuantity = (value) => {
@@ -82,14 +92,6 @@ export default class App extends React.Component {
     })
     this.setState({ cartProducts: currentCart })
   }
-
-  removeItem = (value) => {
-    const currentCart = [...this.state.cartProducts]
-    const itemIndex = currentCart.findIndex(item => item.id === value.id)
-    currentCart.splice(itemIndex, 1)
-    this.setState({ cartProducts: currentCart })
-  }
-
 
   // Life Cycles
 
@@ -104,6 +106,16 @@ export default class App extends React.Component {
     if (prevState.cartProducts !== this.state.cartProducts) {
       localStorage.setItem('CartItens', JSON.stringify([...this.state.cartProducts]))
     }
+  }
+
+  // Telas
+
+  handleScreen = () => {
+    
+  }
+
+  changeCartScreen = () => {
+    this.setState({productsScreen: !this.state.productsScreen})
   }
 
   render() {
@@ -144,23 +156,31 @@ export default class App extends React.Component {
         imageUrl: "https://images5.kabum.com.br/produtos/fotos/112795/kindle-10-geracao-preto-luz-integrada-wi-fi-8gb-ao0772_1589888301_g.jpg"
       },
     ];
-    return (
-      <Tela>
-        <Header />
-        <DivApp>
-          <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos} />
-          <Products filtroState={this.state} produtos={produtos} addToCart={this.addToCart} />
+    if (this.state.productsScreen) {
+      return (
+        <Tela>
+          <Header changeCartScreen={this.changeCartScreen}/>
+          <DivApp>
+            <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos} />
+            <Products filtroState={this.state} produtos={produtos} addToCart={this.addToCart} />
+          </DivApp>
+          <Footer />
+        </Tela>
+      );
+    } else {
+      return (
+        <>
+          <Header changeCartScreen={this.changeCartScreen}/>
           <ShoppingCart
-            filtroState={this.state}
-            produtos={produtos}
-            cartProducts={this.state.cartProducts}
-            decrementQuantity={this.decrementQuantity}
-            increaseQuantity={this.increaseQuantity}
-            removeItem={this.removeItem}
-          />
-        </DivApp>
-        <Footer />
-      </Tela>
-    );
+              filtroState={this.state}
+              produtos={produtos}
+              cartProducts={this.state.cartProducts}
+              decrementQuantity={this.decrementQuantity}
+              increaseQuantity={this.increaseQuantity}
+              removeItem={this.removeItem}
+            />
+        </>
+      )
+    }
   }
 }
