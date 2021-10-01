@@ -52,7 +52,8 @@ height: 13vh;
 
 const Carrinho = styled.img`
 max-width: 3.5vw;
-`;
+cursor: pointer;
+`
 
 export default class Cabecalho extends React.Component {
     render() {
@@ -65,7 +66,7 @@ export default class Cabecalho extends React.Component {
                     <Categorias> Presentes </Categorias>
                     <Categorias> Decoração </Categorias>
                 </Menu>
-                <Carrinho src={carrinho} />
+                <Carrinho src={carrinho} onClick={this.props.changeCartScreen}/>
             </Header>
         );
     }
