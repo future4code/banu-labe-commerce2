@@ -176,7 +176,7 @@ export default class App extends React.Component {
       },
 
       {
-        id: 5,
+        id: 6,
         name: "Camiseta Space Navigators",
         value: 99.99,
         imageUrl: SpaceNavigation
