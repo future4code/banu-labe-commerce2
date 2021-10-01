@@ -66,7 +66,7 @@ export default class App extends React.Component {
 
   // Funções do Carrinho
 
-  addToCart = (value) => {
+  addToCart = value => {
     const currentCart = [...this.state.cartProducts]
     console.log(currentCart)
     const produtoExistenteIndex = currentCart.findIndex(item => item.id === value.id)
@@ -82,7 +82,11 @@ export default class App extends React.Component {
     }
   }
 
-  decrementQuantity = (value) => {
+  CleanCart = () => {
+    this.setState({cartProducts: []})
+  }
+
+  decrementQuantity = value => {
     let currentCart
 
     if (value.quantity === 1) {
@@ -98,12 +102,10 @@ export default class App extends React.Component {
     }
 
     this.setState({ cartProducts: currentCart })
-
-
   }
 
-  increaseQuantity = (value) => {
-    const currentCart = this.state.cartProducts.map((item, i) => {
+  increaseQuantity = value => {
+    const currentCart = this.state.cartProducts.map(item => {
       if (item.id === value.id) {
         return { ...value, quantity: value.quantity + 1 }
       }
@@ -121,17 +123,13 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidUpdate = (prevState) => {
+  componentDidUpdate = prevState => {
     if (prevState.cartProducts !== this.state.cartProducts) {
       localStorage.setItem('CartItens', JSON.stringify([...this.state.cartProducts]))
     }
   }
 
   // Telas
-
-  handleScreen = () => {
-
-  }
 
   changeCartScreen = () => {
     this.setState({ productsScreen: !this.state.productsScreen })
@@ -204,6 +202,8 @@ export default class App extends React.Component {
             decrementQuantity={this.decrementQuantity}
             increaseQuantity={this.increaseQuantity}
             removeItem={this.removeItem}
+            changeCartScreen={this.changeCartScreen}
+            CleanCart={this.CleanCart}
           />
         </>
       )

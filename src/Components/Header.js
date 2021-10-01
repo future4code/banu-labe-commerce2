@@ -11,7 +11,6 @@ height: 13vh;
 background-color: #00acb7;
 padding-right: 50px;
 
-
 @media (max-width: 767px){
     display: flex;
     flex-direction: row;

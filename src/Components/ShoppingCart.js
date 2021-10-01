@@ -5,7 +5,7 @@ import Ame from './image/ame.png';
 import Mastercard from './image/mastercard.png';
 import Picpay from './image/picpay.png';
 import Pix from './image/pix.png';
-import Visa from './image/visa.png'
+import Visa from './image/visa.png';
 
 
 const BodyComponent = styled.div`
@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
 `
 const Container = styled.div`
   width: 90%;
+  height: 85vh;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -51,7 +52,10 @@ const Container = styled.div`
     background-color: #00000020;
     border-radius: 5px;
   }
-  
+  /* background-color: lime; */
+  @media (max-width: 550px) {
+    height: 55vh;
+  }
 `
 const ContainerTitle = styled.span`
   font-size: 2.5em;
@@ -239,6 +243,9 @@ const OrderingWrapper = styled.div`
   flex-flow: column nowrap;
   width: 80%;
   height: 80vh;
+  @media (max-width: 550px) {
+    margin-top: 80px;
+  }
 `
 const Ordering = styled.div`
   width: 100%;
@@ -287,6 +294,35 @@ const Itens = styled(Container)`
     padding: 20px 0;
   }
 `
+
+//
+
+const NoProductsContainer = styled(BodyComponent)`
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+`
+
+const NoProductsTitle = styled(ContainerTitle)`
+  @media (max-width: 625px) {
+    font-size: 2em;
+  }
+  @media (max-width: 500px) {
+    font-size: 1.6em;
+  }
+`
+
+const ProductsBtn = styled(PayButton)`
+`
+
+const CleanCart = styled(PayButton)`
+  margin-top: 15px;
+  margin-bottom: 10px;
+`
+
 // Products
 
 export default class ShoppingCart extends React.Component {
@@ -300,7 +336,8 @@ export default class ShoppingCart extends React.Component {
   }
 
   render() {
-    return (
+    if (this.props.cartProducts.length > 0) {
+      return (
         <BodyComponent>
           <GlobalStyle/>
           <Itens>
@@ -327,6 +364,7 @@ export default class ShoppingCart extends React.Component {
                 })
               }
             </Container>
+            <CleanCart onClick={this.props.CleanCart}>Limpar Carrinho</CleanCart>
           </Itens>   
           <OrderingWrapper>
             <Ordering>
@@ -363,6 +401,14 @@ export default class ShoppingCart extends React.Component {
             </PayContainer>
           </OrderingWrapper>
         </BodyComponent>
-    );
+      );
+    } else {
+      return (
+        <NoProductsContainer>
+          <NoProductsTitle>Não há itens no Carrinho :(</NoProductsTitle>
+            <ProductsBtn onClick={this.props.changeCartScreen}>Adicionar Produtos</ProductsBtn>
+        </NoProductsContainer>
+      )
+    }
   }
 }
