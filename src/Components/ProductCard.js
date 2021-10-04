@@ -78,7 +78,7 @@ export default class ProductCard extends React.Component {
       if (this.props.filtroState.valorMin < produto.value || this.props.filtroState.valorMin === '') {
         return true
       } else {
-        return false
+        return false 
       }
     })
 
@@ -98,12 +98,29 @@ export default class ProductCard extends React.Component {
       }
     })
 
-    let MapFilter = MapName.map((produto, index, valor) => {
+    let MapSort = MapName.sort((a, b) => {
+      switch (this.props.sortingParameter) {
+        case "name":
+           return a.name.localeCompare(b.name)
+        case "rating":
+           return a.rating - b.rating
+        case "priceHighest":
+           return b.value - a.value
+        case "priceLowest":
+          return a.value - b.value
+        default:
+          return a.value - b.value
+
+     }
+  })
+
+    let MapFilter = MapSort.map((produto, index, valor) => {
       return (
         <ShoppingCartItem key={index}>
           <ItemImage src={produto.imageUrl} />
           <p>{produto.name}</p>
           <p>R$ {produto.value}</p>
+          <p>Classificação:{produto.rating}</p>
           <Botao onClick={() => this.props.addToCart(produto)}>Adicionar ao carrinho</Botao>
         </ShoppingCartItem>
       )

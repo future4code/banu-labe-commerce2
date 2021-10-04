@@ -71,12 +71,16 @@ export default class Filters extends React.Component {
             <TituloFiltro>Filtros:</TituloFiltro>
                 <label>
                     <P>Valor mínimo</P>
-                    <Input type={"number"} onChange={this.props.onChangeValorMin} 
+                    <Input
+                    type={"number"} 
+                    onChange={this.props.onChangeValorMin} 
                     value={this.props.filtroState.valorMin} />
                 </label>
                 <label>
                     <P>Valor máximo</P>
-                    <Input type={"number"} onChange={this.props.onChangeValorMax} 
+                    <Input 
+                    type={"number"} 
+                    onChange={this.props.onChangeValorMax} 
                     value={this.props.filtroState.valorMax} />
                 </label>
                 <label>

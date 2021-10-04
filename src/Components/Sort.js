@@ -17,8 +17,8 @@ state = {
 
 updateSortingParameter = (ev) => {
     this.setState({
-            sortingParameter: ev.target.value
-    })
+            sortingParameter: ev.target.value})
+            console.log(this.state.sortingParameter)
 }
 
 
@@ -31,10 +31,10 @@ updateSortingParameter = (ev) => {
                         name="sort"
                         value={this.state.sortingParameter}
                         onChange={this.updateSortingParameter}>
-                        <option value="priceLowest" onClick={null}>Menor preço</option>
-                        <option value="priceHighest" onClick={null}>Maior preço</option>
-                        <option value="title" onClick={null}>Ordem alfabética (A - Z)</option>
-                        <option value="rating" onClick={null}>Avaliação dos clientes</option>
+                        <option value="priceLowest" onClick={this.props.onClickPriceLowest}>Menor preço</option>
+                        <option value="priceHighest" onClick={this.props.onClickPriceHighest}>Maior preço</option>
+                        <option value="name" onClick={this.props.onClickTitle}>Ordem alfabética (A - Z)</option>
+                        <option value="rating" onClick={this.props.onClickRating}>Avaliação dos clientes</option>
                     </select>
                 </DivProductFilterOptions>
             </div>
