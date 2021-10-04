@@ -3,6 +3,7 @@ import styled from "styled-components";
 // import './App.css';
 import Header from './Components/Header';
 import Filters from './Components/Filters';
+import Sort from './Components/Sort';
 import Products from './Components/Products';
 import ShoppingCart from './Components/ShoppingCart';
 import Footer from './Components/Footer';
@@ -63,6 +64,8 @@ export default class App extends React.Component {
     this.setState({ nome: event.target.value })
     console.log(this.state.nome)
   }
+
+
 
   // Funções do Carrinho
 
@@ -142,42 +145,48 @@ export default class App extends React.Component {
         id: 1,
         name: "Camiseta Apollo XI",
         value: 79.99,
-        imageUrl: Apollo
+        imageUrl: Apollo,
+        rating: 4.5
       },
 
       {
         id: 2,
         name: "Camiseta Join the Dark Side",
         value: 99.99,
-        imageUrl: JoinDarkSide
+        imageUrl: JoinDarkSide,
+        rating: 3
       },
 
       {
         id: 3,
         name: "Camiseta Future Wars",
         value: 89.99,
-        imageUrl: FutureWars
+        imageUrl: FutureWars,
+        rating: 2
       },
 
       {
         id: 4,
         name: "Camiseta Nasa",
         value: 59.99,
-        imageUrl: NasaColored
+        imageUrl: NasaColored,
+        rating: 5
       },
 
       {
         id: 5,
         name: "Camiseta ISS",
         value: 79.99,
-        imageUrl: ISSBlue
+        imageUrl: ISSBlue,
+        rating: 4.5
       },
 
       {
         id: 6,
         name: "Camiseta Space Navigators",
         value: 99.99,
-        imageUrl: SpaceNavigation
+        imageUrl: SpaceNavigation,
+        rating: 3.5
       },
     ];
     if (this.state.productsScreen) {
@@ -185,8 +194,18 @@ export default class App extends React.Component {
         <Tela>
           <Header changeCartScreen={this.changeCartScreen} />
           <DivApp>
-            <Filters onChangeValorMin={this.onChangeValorMin} onChangeValorMax={this.onChangeValorMax} onChangeName={this.onChangeName} filtroState={this.state} produtos={produtos} />
-            <Products filtroState={this.state} produtos={produtos} addToCart={this.addToCart} />
+            <Filters 
+              onChangeValorMin={this.onChangeValorMin} 
+              onChangeValorMax={this.onChangeValorMax} 
+              onChangeName={this.onChangeName} 
+              filtroState={this.state} 
+              produtos={produtos} 
+            />
+
+            <Products 
+            filtroState={this.state} 
+            produtos={produtos} 
+            addToCart={this.addToCart} />
           </DivApp>
           <Footer />
         </Tela>
